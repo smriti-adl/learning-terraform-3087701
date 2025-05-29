@@ -29,6 +29,7 @@ resource "aws_instance" "blog" {
   }
 }
 
+
 module "blog_sg" {
   source  = "terraform-aws-modules/security-group/aws"
   version = "5.3.0"
