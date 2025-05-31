@@ -3,41 +3,45 @@ variable "instance_type" {
   default     = "t3.nano"
 }
 
-variable "ami_fliter"{
-    description = "Name filter and owner for AMI"
+variable "ami_filter" {
+  description = "Name filter and owner for AMI"
 
-    type    = pbject({
-      name  = string
-      owner = string
+  type = object({
+    name  = list(string)
+    owner = string
+  })
 
-    })
-    default = {
-    name = ["bitnami-tomcat-*-x86_64-hvm-ebs-nami"]
-  owner= "979382823631" # Bitnami
-    }
+  default = {
+    name  = ["bitnami-tomcat-*-x86_64-hvm-ebs-nami"]
+    owner = "979382823631" # Bitnami
+  }
 }
 
-data "aws_vpc" "default" {
-  default = true
-}
+# REMOVE this block if already declared in another file
+# data "aws_vpc" "default" {
+#   default = true
+# }
 
-variable ="enviornment" {
-  decsription = "Development Environment"
-  type = object ({
+variable "environment" {
+  description = "Development Environment"
+
+  type = object({
     name           = string
     network_prefix = string
-})
+  })
+
   default = {
-    name = "dev"
-    cidr = "10.0"
+    name           = "dev"
+    network_prefix = "10.0"
   }
 }
 
 variable "asg_min_size" {
-  decxsription = "minimum number of instance in the ASG"
-  default      = 1
+  description = "Minimum number of instances in the ASG"
+  default     = 1
 }
+
 variable "asg_max_size" {
-  decxsription = "maximum number of instance in the ASG"
-  default      = 2
+  description = "Maximum number of instances in the ASG"
+  default     = 2
 }
