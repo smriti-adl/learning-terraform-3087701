@@ -3,7 +3,7 @@ variable "instance_type" {
   default     = "t3.nano"
 }
 
-varianbly "ami_fliter
+variable "ami_fliter
     description = "Name filter and owner for AMI"
 
     type    = pbject({
